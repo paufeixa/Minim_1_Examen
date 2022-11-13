@@ -1,22 +1,18 @@
 package edu.upc.dsa.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Partida {
     String idPartida;
     String descripcion;
     int niveles;
     int nivelActual;
     int puntosActuales;
-
     String fecha;
+    List<Actividad> actividades;
 
-    public Partida() {
-        this.idPartida = "";
-        this.descripcion = "";
-        this.niveles = 0;
-        this.nivelActual = 0;
-        this.puntosActuales = 0;
-        this.fecha = "";
-    }
+    public Partida() {}
 
     public Partida(String idPartida, String descripcion, int niveles) {
         this.idPartida = idPartida;
@@ -25,6 +21,7 @@ public class Partida {
         this.nivelActual = 1;
         this.puntosActuales = 50;
         this.fecha = "";
+        this.actividades = new ArrayList<>();
     }
 
     public String getIdPartida() {
@@ -73,5 +70,17 @@ public class Partida {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public List<Actividad> getActividad() {
+        return actividades;
+    }
+
+    public void setActividad(List<Actividad> actividades) {
+        this.actividades = actividades;
+    }
+
+    public void crearActividad(Actividad actividad) {
+        this.actividades.add(actividad);
     }
 }

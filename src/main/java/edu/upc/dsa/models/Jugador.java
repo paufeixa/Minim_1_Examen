@@ -8,17 +8,14 @@ public class Jugador {
     String idJugador;
     Partida partidaActual;
 
-    String fecha;
-
     List<Partida> partidas;
 
-    public Jugador() {
-    }
+    public Jugador() {}
 
     public Jugador(String idJugador) {
         this.idJugador = idJugador;
-        this.partidaActual = new Partida();
-        this.partidas = new LinkedList<>();
+        this.partidaActual = null;
+        this.partidas = new ArrayList<>();
     }
 
     public String getIdJugador() {
@@ -47,26 +44,16 @@ public class Jugador {
 
     public void finPartida() {
         partidas.add(this.partidaActual);
-        Partida partidaVacia = new Partida();
-        this.partidaActual = partidaVacia;
+        this.partidaActual = null;
     }
 
-    public void partidaActiva() throws NoPartidaActivaException {
-        if (partidaActual.getIdPartida() == null) {
-            throw new NoPartidaActivaException();
-        }
-    }
-
-    public List<Actividad> actividad(String idJuego) {
-        List<Actividad> actividades = new ArrayList<>();
-        int i = 1;
+    public List<ListaActividad> actividad(String idJuego) {
+        List<ListaActividad> actividades = new ArrayList<>();
+        int i = 0;
         while (i < partidas.size()) {
-            if (partidas.get(i).getIdPartida() == idJuego) {
-                int nivel = partidas.get(i).getNivelActual();
-                int puntos = partidas.get(i).getPuntosActuales();
-                String fecha = partidas.get(i).getFecha();
-                Actividad actividad = new Actividad(nivel, puntos, fecha);
-                actividades.add(actividad);
+            if (Objects.equals(partidas.get(i).getIdPartida(), idJuego)) {
+                ListaActividad listaActividad = new ListaActividad(partidas.get(i).getActividad());
+                actividades.add(listaActividad);
             }
             i = i + 1;
         }

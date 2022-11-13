@@ -1,11 +1,7 @@
 package edu.upc.dsa.data;
 
-import edu.upc.dsa.exceptions.NoIniciarJuegoException;
-import edu.upc.dsa.exceptions.NoPartidaActivaException;
-import edu.upc.dsa.exceptions.NoJugadorException;
-import edu.upc.dsa.models.Actividad;
-import edu.upc.dsa.models.Juego;
-import edu.upc.dsa.models.Partida;
+import edu.upc.dsa.exceptions.*;
+import edu.upc.dsa.models.*;
 
 import java.util.List;
 
@@ -22,11 +18,21 @@ public interface MyGameManager {
 
     public void finalJuego(String idJugador) throws NoJugadorException, NoPartidaActivaException;
 
-    public void buscarJugador(String idJugador) throws NoJugadorException;
+    public List<PuntuacionPorJugador> puntacionPorJugadorEnJuego(String idJuego) throws NoJuegoException;
 
-    public List<Partida> partidasUsuario(String idJugador) throws NoJugadorException;
+    public List<Partida> partidasJugador(String idJugador) throws NoJugadorException;
 
-    public List<Actividad> actividadJugadorEnJuego(String idJuego, String idJugador) throws NoJugadorException;
+    public List<ListaActividad> actividadJugadorEnJuego(String idJuego, String idJugador) throws NoJugadorException;
 
-    public void registro(String idJugador);
+    public Jugador buscarJugador(String idJugador) throws NoJugadorException;
+
+    public Partida partidaActiva(String idJugador) throws NoPartidaActivaException, NoJugadorException;
+
+    public void registro(String idJugador) throws JugadorExistenteException;
+
+    public int numJuegos();
+
+    public int numJugadores();
+
+    public Jugador getJugador(String idJugador) throws NoJugadorException;
 }
